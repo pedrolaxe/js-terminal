@@ -30,7 +30,7 @@
                 action: this._transformToFunction(command.action),
                 response: this._transformToFunction(command.response),
                 execute: function(param) {
-                    if (typeof param === 'undefined' && this.parameter) {
+                    if (param === '' && this.parameter) {
                         return this.parameter.messageIfMissing;
                     }
                     
