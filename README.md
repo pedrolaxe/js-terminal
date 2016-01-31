@@ -8,8 +8,6 @@ The copy of Terminal developed in pure JS
 1.1
 
 ### Authors
-@pedrolaxe
-
-@gtkatakura
+Pedro Laxe, Gabriel Takashi Katakura
 
 [drag]: https://raw.githubusercontent.com/pedrolaxe/js-terminal/master/image1.jpg
