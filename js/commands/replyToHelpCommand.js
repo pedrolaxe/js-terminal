@@ -9,6 +9,7 @@
             '- Wiki + keyword to search directly in Wikipedia (ex. wiki php)',
             '- \'Time\' will display the current time.',
             '- \'Date\' will display the current date.',
+            '- \'creators\' show the creators names',
             '* There are more keywords that you have to discover by yourself.'
         ]
     });
