@@ -10,15 +10,13 @@ var JAVASCRIPT_SRC = [
         'app/js/view/index.js'
     ];
     
-gulp.task('scripts', function()
-{
+gulp.task('scripts', function() {
     return gulp.src(JAVASCRIPT_SRC)
         .pipe(concat('app.js'))
         .pipe(gulp.dest('app/js'));
 });
 
-gulp.task('watch', function()
-{
+gulp.task('watch', function() {
     gulp.watch(JAVASCRIPT_SRC, [ 'scripts' ]);
 });
 
