@@ -1,0 +1,23 @@
+{
+  "name": "js-terminal",
+  "version": "1.0.0",
+  "description": "The copy of Terminal developed in pure JS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pedrolaxe/js-terminal.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pedrolaxe/js-terminal/issues"
+  },
+  "homepage": "https://github.com/pedrolaxe/js-terminal#readme",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0"
+  }
+}
