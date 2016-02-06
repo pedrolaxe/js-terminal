@@ -1,5 +1,5 @@
-(function(repository) {
-    repository.register({
+(function(Terminal) {
+    Terminal.commands.searchOnYoutubeCommand = {
         name: 'youtube',
         parameter: {
             name: 'search',
@@ -11,5 +11,5 @@
         response: function(search) {
             return '<i>I\'ve searched on YouTube for <b>' + search + '</b> it should be opened now.</i>';
         }
-    });
-})(window.CommandRepository);
+    };
+})(window.Terminal);

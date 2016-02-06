@@ -1,10 +1,66 @@
 (function(global) {
+    var Terminal = {
+        _resolveCommands: function() {
+            return Object.keys(this.commands).map(function(key) {
+                return Terminal.CommandDecorator.decorate(Terminal.commands[key]);
+            });
+        },
+        start: function() {
+            var resolvedCommands = this._resolveCommands();
+            this.CommandRepository.register(resolvedCommands);
+        },
+        commands: {},
+        create: function(options) {
+            var results = options.results,
+                textInput = options.textInput;
+                
+            return {
+                _addTextToResults: function(text) {
+                    results.innerHTML += '<p>' + text + '</p>';
+                },
+                _clearInput: function() {
+                    textInput.value = '';
+                },
+                _scrollToBottomOfResults: function() {
+                    results.scrollTop = results.scrollHeight;
+                },
+                focus: function() {
+                    textInput.focus();
+                    this._scrollToBottomOfResults();
+                },
+                enter: function() {
+                    var commandText = textInput.value.trim(),
+                        command = Terminal.CommandRepository.findByCommandText(commandText.toLowerCase()),
+                        parameter = '',
+                        response = '';
+
+                    this._addTextToResults('<p class=\'userEnteredText\'>> ' + commandText + '</p>');
+                    
+                    if (command) {
+                        parameter = commandText.replace(command.name, '').trim();
+                        response = command.execute(parameter);
+                    }
+                    else {
+                        response = '<p><i>The command <b>' + commandText + '</b> was not found. Type <b>Help</b> to see all commands.</i></p>';
+                    }
+                    
+                    this._addTextToResults(response);
+                    this._clearInput();
+                    this._scrollToBottomOfResults();
+                }
+            };
+        }
+    };
+    
+    global.Terminal = Terminal;
+})(window);
+(function(Terminal) {
     var emptyFunction = function() {},
         isArray = function(arg) {
             return Object.prototype.toString.call(arg) === '[object Array]';
         };
 
-    global.CommandDecorator = {
+    Terminal.CommandDecorator = {
         _transformToFunction: function(response) {
             if (isArray(response)) {
                 response = response.join('<br>');    
@@ -40,13 +96,14 @@
             };
         }
     };
-})(window);
-(function(global, CommandDecorator) {
-    global.CommandRepository = {
+})(window.Terminal);
+(function(Terminal) {
+    Terminal.CommandRepository = {
         _data: [],
-        register: function(command) {
-            var commandDecorated = CommandDecorator.decorate(command);
-            this._data.push(commandDecorated);
+        register: function(commands) {
+            for (var i = 0, ii = commands.length; i < ii; i++) {
+                this._data.push(commands[i]);
+            }
         },
         findByCommandText: function(commandText) {
             return this._data.find(function(command, index, obj) {
@@ -62,9 +119,19 @@
             });
         }
     };
-})(window, window.CommandDecorator);
-(function(repository) {
-    repository.register({
+})(window.Terminal);
+(function(Terminal) {
+    Terminal.TerminalFactory = {
+        create: function() {
+            return Terminal.create({
+                results: document.getElementById('terminalReslutsCont'),
+                textInput: document.getElementById('terminalTextInput')
+            });
+        }
+    }
+})(window.Terminal);
+(function(Terminal) {
+    Terminal.commands.openWindowCommand = {
         name: 'open',
         parameter: {
             name: 'link',
@@ -76,16 +143,16 @@
         response: function(link) {
             return '<i>The URL <b>' + link + '</b> should be opened now.</i>';
         }
-    });
-})(window.CommandRepository);
-(function(repository) {
-    repository.register({
+    };
+})(window.Terminal);
+(function(Terminal) {
+    Terminal.commands.replyToCreatorCommand = {
         name: 'creators',
         response: 'My Creator is Pedro Laxe with cooperation of Gabriel Takashi Katakura.'
-    });
-})(window.CommandRepository);
-(function(repository) {
-    repository.register({
+    };
+})(window.Terminal);
+(function(Terminal) {
+    Terminal.commands.replyToDateCommand = {
         name: 'date',
         response: function() {
             var timeAndDate = new Date(),
@@ -97,38 +164,38 @@
 
             return dateDay + '/' + dateMonth + '/' + dateYear;
         }
-    });
-})(window.CommandRepository);
-(function(repository) {
-    repository.register({
+    };
+})(window.Terminal);
+(function(Terminal) {
+    Terminal.commands.replyToGitCommand = {
         name: 'git',
         response: [
             'git push origin master',
             'you can check this project\'s repo on GitHub: <a target=\'_blank\' href=\'https://github.com/pedrolaxe/js-terminal\'>https://github.com/pedrolaxe/js-terminal</a>'
         ]
-    });
-})(window.CommandRepository);
-(function(repository) {
-    repository.register({
+    };
+})(window.Terminal);
+(function(Terminal) {
+    Terminal.commands.replyToGitPushOriginMasterCommand = {
         name: 'git push origin master',
         response: 'Push me baby!' // \o/
-    });
-})(window.CommandRepository);
-(function(repository) {
-    repository.register({
+    };
+})(window.Terminal);
+(function(Terminal) {
+    Terminal.commands.replyToGitStatusCommand = {
         name: 'git status',
         response: 'nothing to commit, working directory clean.'
-    });
-})(window.CommandRepository);
-(function(repository) {
-    repository.register({
+    };
+})(window.Terminal);
+(function(Terminal) {
+    Terminal.commands.replyToHelloCommand = {
         name: 'hello',
         aliases: [ 'hi', 'hola', 'oi' ],
         response: 'Hello, it\'s me... I was wondering if after all these years you\'d like to meet...'
-    });
-})(window.CommandRepository);
-(function(repository) {
-    repository.register({
+    };
+})(window.Terminal);
+(function(Terminal) {
+    Terminal.commands.replyToHelpCommand = {
         name: 'help',
         aliases: [ '?' ],
         response: [
@@ -142,22 +209,21 @@
             '- \'creators\' show the creators names.',
             '* There are more keywords that you have to discover by yourself.'
         ]
-    });
-})(window.CommandRepository);
-
-(function(repository) {
-    repository.register({
+    };
+})(window.Terminal);
+(function(Terminal) {
+    Terminal.commands.replyToLoveYouCommand = {
         name: 'love you',
         aliases: [ 'i love you', 'love' ],
         response: 'Aww! That\'s so sweet. Here\'s some love for you too ❤ ❤ ❤ !'
-    });
-})(window.CommandRepository);
-(function(repository) {
+    };
+})(window.Terminal);
+(function(Terminal) {
     function padLeft(value, totalWidth, paddingChar){
         return Array(totalWidth - value.toString().length + 1).join(paddingChar || '0') + value;
     }
     
-    repository.register({
+    Terminal.commands.replyToTimeCommand = {
         name: 'time',
         response: function() {
             var timeAndDate = new Date(),
@@ -168,10 +234,10 @@
 
             return timeHours + ":" + timeMinutes;
         }
-    });
-})(window.CommandRepository);
-(function(repository) {
-    repository.register({
+    };
+})(window.Terminal);
+(function(Terminal) {
+    Terminal.commands.searchOnGoogleCommand = {
         name: 'google',
         parameter: {
             name: 'search',
@@ -183,10 +249,10 @@
         response: function(search) {
             return '<i>I\'ve searched on Google for <b>' + search + '</b> it should be opened now.</i>';
         }
-    });
-})(window.CommandRepository);
-(function(repository) {
-    repository.register({
+    };
+})(window.Terminal);
+(function(Terminal) {
+    Terminal.commands.searchOnWikiCommand = {
         name: 'wiki',
         parameter: {
             name: 'search',
@@ -198,10 +264,10 @@
         response: function(search) {
             return '<i>I\'ve searched on Wikipedia for <b>' + search + '</b> it should be opened now.</i>';
         }
-    });
-})(window.CommandRepository);
-(function(repository) {
-    repository.register({
+    };
+})(window.Terminal);
+(function(Terminal) {
+    Terminal.commands.searchOnYahooCommand = {
         name: 'yahoo',
         parameter: {
             name: 'search',
@@ -213,11 +279,11 @@
         response: function(search) {
             return '<i>I\'ve searched on Yahoo for <b>' + search + '</b> it should be opened now.</i>';
         }
-    });
-})(window.CommandRepository);
+    };
+})(window.Terminal);
 
-(function(repository) {
-    repository.register({
+(function(Terminal) {
+    Terminal.commands.searchOnYoutubeCommand = {
         name: 'youtube',
         parameter: {
             name: 'search',
@@ -229,62 +295,8 @@
         response: function(search) {
             return '<i>I\'ve searched on YouTube for <b>' + search + '</b> it should be opened now.</i>';
         }
-    });
-})(window.CommandRepository);
-(function(global, CommandRepository) {
-    global.Terminal = {
-        create: function(options) {
-            var results = options.results,
-                textInput = options.textInput;
-                
-            return {
-                _addTextToResults: function(text) {
-                    results.innerHTML += '<p>' + text + '</p>';
-                },
-                _clearInput: function() {
-                    textInput.value = '';
-                },
-                _scrollToBottomOfResults: function() {
-                    results.scrollTop = results.scrollHeight;
-                },
-                focus: function() {
-                    textInput.focus();
-                    this._scrollToBottomOfResults();
-                },
-                enter: function() {
-                    var commandText = textInput.value.trim(),
-                        command = CommandRepository.findByCommandText(commandText.toLowerCase()),
-                        parameter = '',
-                        response = '';
-
-                    this._addTextToResults('<p class=\'userEnteredText\'>> ' + commandText + '</p>');
-                    
-                    if (command) {
-                        parameter = commandText.replace(command.name, '').trim();
-                        response = command.execute(parameter);
-                    }
-                    else {
-                        response = '<p><i>The command <b>' + commandText + '</b> was not found. Type <b>Help</b> to see all commands.</i></p>';
-                    }
-                    
-                    this._addTextToResults(response);
-                    this._clearInput();
-                    this._scrollToBottomOfResults();
-                }
-            };
-        }
     };
-})(window, window.CommandRepository);
-(function(global, Terminal) {
-    global.TerminalFactory = {
-        create: function() {
-            return Terminal.create({
-                results: document.getElementById('terminalReslutsCont'),
-                textInput: document.getElementById('terminalTextInput')
-            });
-        }
-    }
-})(window, window.Terminal);
+})(window.Terminal);
 /**
 * JS Terminal
 * Version 1.1
@@ -292,9 +304,11 @@
 * Contributor: Gabriel Takashi Katakura <gt.katakura@gmail.com>
 **/
 
-(function(TerminalFactory) {
+(function(Terminal) {
+    Terminal.start();
+    
     document.addEventListener('DOMContentLoaded', function() {
-        var terminal = TerminalFactory.create();
+        var terminal = Terminal.TerminalFactory.create();
         terminal.focus();
         
         document.getElementsByTagName('form')[0].onsubmit = function(evt) {
@@ -304,4 +318,4 @@
             console.log("JS Terminal Loaded");
         };
     });
-})(window.TerminalFactory);
+})(window.Terminal);

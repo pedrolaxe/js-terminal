@@ -5,9 +5,11 @@
 * Contributor: Gabriel Takashi Katakura <gt.katakura@gmail.com>
 **/
 
-(function(TerminalFactory) {
+(function(Terminal) {
+    Terminal.start();
+    
     document.addEventListener('DOMContentLoaded', function() {
-        var terminal = TerminalFactory.create();
+        var terminal = Terminal.TerminalFactory.create();
         terminal.focus();
         
         document.getElementsByTagName('form')[0].onsubmit = function(evt) {
@@ -17,4 +19,4 @@
             console.log("JS Terminal Loaded");
         };
     });
-})(window.TerminalFactory);
+})(window.Terminal);

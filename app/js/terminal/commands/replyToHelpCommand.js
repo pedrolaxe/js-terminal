@@ -1,5 +1,5 @@
-(function(repository) {
-    repository.register({
+(function(Terminal) {
+    Terminal.commands.replyToHelpCommand = {
         name: 'help',
         aliases: [ '?' ],
         response: [
@@ -13,5 +13,5 @@
             '- \'creators\' show the creators names.',
             '* There are more keywords that you have to discover by yourself.'
         ]
-    });
-})(window.CommandRepository);
+    };
+})(window.Terminal);

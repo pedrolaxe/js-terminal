@@ -1,5 +1,5 @@
-(function(repository) {
-    repository.register({
+(function(Terminal) {
+    Terminal.commands.searchOnGoogleCommand = {
         name: 'google',
         parameter: {
             name: 'search',
@@ -11,5 +11,5 @@
         response: function(search) {
             return '<i>I\'ve searched on Google for <b>' + search + '</b> it should be opened now.</i>';
         }
-    });
-})(window.CommandRepository);
+    };
+})(window.Terminal);

@@ -1,5 +1,5 @@
-(function(repository) {
-    repository.register({
+(function(Terminal) {
+    Terminal.commands.openWindowCommand = {
         name: 'open',
         parameter: {
             name: 'link',
@@ -11,5 +11,5 @@
         response: function(link) {
             return '<i>The URL <b>' + link + '</b> should be opened now.</i>';
         }
-    });
-})(window.CommandRepository);
+    };
+})(window.Terminal);

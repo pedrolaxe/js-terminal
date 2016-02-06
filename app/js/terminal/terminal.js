@@ -1,5 +1,15 @@
-(function(global, CommandRepository) {
-    global.Terminal = {
+(function(global) {
+    var Terminal = {
+        _resolveCommands: function() {
+            return Object.keys(this.commands).map(function(key) {
+                return Terminal.CommandDecorator.decorate(Terminal.commands[key]);
+            });
+        },
+        start: function() {
+            var resolvedCommands = this._resolveCommands();
+            this.CommandRepository.register(resolvedCommands);
+        },
+        commands: {},
         create: function(options) {
             var results = options.results,
                 textInput = options.textInput;
@@ -20,7 +30,7 @@
                 },
                 enter: function() {
                     var commandText = textInput.value.trim(),
-                        command = CommandRepository.findByCommandText(commandText.toLowerCase()),
+                        command = Terminal.CommandRepository.findByCommandText(commandText.toLowerCase()),
                         parameter = '',
                         response = '';
 
@@ -41,4 +51,6 @@
             };
         }
     };
-})(window, window.CommandRepository);
+    
+    global.Terminal = Terminal;
+})(window);

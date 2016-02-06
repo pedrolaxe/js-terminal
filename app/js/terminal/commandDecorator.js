@@ -1,10 +1,10 @@
-(function(global) {
+(function(Terminal) {
     var emptyFunction = function() {},
         isArray = function(arg) {
             return Object.prototype.toString.call(arg) === '[object Array]';
         };
 
-    global.CommandDecorator = {
+    Terminal.CommandDecorator = {
         _transformToFunction: function(response) {
             if (isArray(response)) {
                 response = response.join('<br>');    
@@ -40,4 +40,4 @@
             };
         }
     };
-})(window);
+})(window.Terminal);
