@@ -18,6 +18,14 @@
             
             return response || emptyFunction;
         },
+        _execute: function(param) {
+            if (param === '' && this.parameter) {
+                return this.parameter.messageIfMissing;
+            }
+            
+            this.action(param);
+            return this.response(param);
+        },
         decorate: function(command) {
             var name = command.name || '',
                 aliases = command.aliases || [];
@@ -29,14 +37,7 @@
                 parameter: command.parameter || null,
                 action: this._transformToFunction(command.action),
                 response: this._transformToFunction(command.response),
-                execute: function(param) {
-                    if (param === '' && this.parameter) {
-                        return this.parameter.messageIfMissing;
-                    }
-                    
-                    this.action(param);
-                    return this.response(param);
-                }
+                execute: this._execute
             };
         }
     };
