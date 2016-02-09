@@ -18,26 +18,23 @@
             
             return response || emptyFunction;
         },
-        _execute: function(param) {
-            if (param === '' && this.parameter) {
-                return this.parameter.messageIfMissing;
-            }
-            
-            this.action(param);
-            return this.response(param);
-        },
         decorate: function(command) {
             var name = command.name || '',
-                aliases = command.aliases || [];
+                aliases = command.aliases || [],
+                execute = command.execute || this._transformToFunction(command.response);
                 
             return {
                 name: name,
                 aliases: aliases,
                 aliasesAndName: aliases.concat([ name ]), 
                 parameter: command.parameter || null,
-                action: this._transformToFunction(command.action),
-                response: this._transformToFunction(command.response),
-                execute: this._execute
+                execute: function(param) {
+                    if (param === '' && this.parameter) {
+                        return this.parameter.messageIfMissing;
+                    }
+                    
+                    return execute(param);
+                }
             };
         }
     };

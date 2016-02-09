@@ -74,26 +74,23 @@
             
             return response || emptyFunction;
         },
-        _execute: function(param) {
-            if (param === '' && this.parameter) {
-                return this.parameter.messageIfMissing;
-            }
-            
-            this.action(param);
-            return this.response(param);
-        },
         decorate: function(command) {
             var name = command.name || '',
-                aliases = command.aliases || [];
+                aliases = command.aliases || [],
+                execute = command.execute || this._transformToFunction(command.response);
                 
             return {
                 name: name,
                 aliases: aliases,
                 aliasesAndName: aliases.concat([ name ]), 
                 parameter: command.parameter || null,
-                action: this._transformToFunction(command.action),
-                response: this._transformToFunction(command.response),
-                execute: this._execute
+                execute: function(param) {
+                    if (param === '' && this.parameter) {
+                        return this.parameter.messageIfMissing;
+                    }
+                    
+                    return execute(param);
+                }
             };
         }
     };
@@ -138,10 +135,8 @@
             name: 'link',
             messageIfMissing: 'Type open + something to navigate.'
         },
-        action: function(link) {
+        execute: function(link) {
             window.open('http://' + link.toLowerCase(), '_blank');
-        },
-        response: function(link) {
             return '<i>The URL <b>' + link + '</b> should be opened now.</i>';
         }
     };
@@ -244,10 +239,8 @@
             name: 'search',
             messageIfMissing: 'Type google + something to search for.'
         },
-        action: function(search) {
+        execute: function(search) {
             window.open('https://www.google.com.br/search?q=' + search, '_blank');
-        },
-        response: function(search) {
             return '<i>I\'ve searched on Google for <b>' + search + '</b> it should be opened now.</i>';
         }
     };
@@ -259,10 +252,8 @@
             name: 'search',
             messageIfMissing: 'Type wiki + something to search for.'
         },
-        action: function(search) {
+        execute: function(search) {
             window.open('https://pt.wikipedia.org/w/index.php?search=' + search, '_blank');
-        },
-        response: function(search) {
             return '<i>I\'ve searched on Wikipedia for <b>' + search + '</b> it should be opened now.</i>';
         }
     };
@@ -274,10 +265,8 @@
             name: 'search',
             messageIfMissing: 'Type yahoo + something to search for.'
         },
-        action: function(search) {
+        execute: function(search) {
             window.open('https://br.search.yahoo.com/search?p=' + search, '_blank');
-        },
-        response: function(search) {
             return '<i>I\'ve searched on Yahoo for <b>' + search + '</b> it should be opened now.</i>';
         }
     };
@@ -290,10 +279,8 @@
             name: 'search',
             messageIfMissing: 'Type youtube + something to search for.'
         },
-        action: function(search) {
+        execute: function(search) {
             window.open('https://www.youtube.com/results?search_query=' + search, '_blank');
-        },
-        response: function(search) {
             return '<i>I\'ve searched on YouTube for <b>' + search + '</b> it should be opened now.</i>';
         }
     };
