@@ -1,9 +1,9 @@
-(function(repository) {
+(function(Terminal) {
     function padLeft(value, totalWidth, paddingChar){
         return Array(totalWidth - value.toString().length + 1).join(paddingChar || '0') + value;
     }
     
-    repository.register({
+    Terminal.commands.replyToTimeCommand = {
         name: 'time',
         response: function() {
             var timeAndDate = new Date(),
@@ -14,5 +14,5 @@
 
             return timeHours + ":" + timeMinutes;
         }
-    });
-})(window.CommandRepository);
+    };
+})(window.Terminal);

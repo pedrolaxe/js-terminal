@@ -1,5 +1,5 @@
-(function(global, Terminal) {
-    global.TerminalFactory = {
+(function(Terminal) {
+    Terminal.TerminalFactory = {
         create: function() {
             return Terminal.create({
                 results: document.getElementById('terminalReslutsCont'),
@@ -7,4 +7,4 @@
             });
         }
     }
-})(window, window.Terminal);
+})(window.Terminal);

@@ -1,9 +1,10 @@
-(function(global, CommandDecorator) {
-    global.CommandRepository = {
+(function(Terminal) {
+    Terminal.CommandRepository = {
         _data: [],
-        register: function(command) {
-            var commandDecorated = CommandDecorator.decorate(command);
-            this._data.push(commandDecorated);
+        register: function(commands) {
+            for (var i = 0, ii = commands.length; i < ii; i++) {
+                this._data.push(commands[i]);
+            }
         },
         findByCommandText: function(commandText) {
             return this._data.find(function(command, index, obj) {
@@ -19,4 +20,4 @@
             });
         }
     };
-})(window, window.CommandDecorator);
+})(window.Terminal);

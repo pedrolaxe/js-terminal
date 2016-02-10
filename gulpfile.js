@@ -2,13 +2,10 @@ var gulp = require('gulp'),
     concat = require('gulp-concat');
     
 var JAVASCRIPT_SRC = [
-        'app/js/terminal/commandDecorator.js',
-        'app/js/terminal/commandRepository.js',
-        'app/js/terminal/commands/*.js',
-        'app/js/terminal/terminal.js',
-        'app/js/terminal/terminalFactory.js',
-        'app/js/view/index.js'
-    ];
+    'app/js/terminal/terminal.js',
+    'app/js/terminal/**/*.js',
+    'app/js/view/index.js'
+];
     
 gulp.task('scripts', function() {
     return gulp.src(JAVASCRIPT_SRC)
