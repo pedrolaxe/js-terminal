@@ -10,6 +10,9 @@ The copy of Terminal developed in pure JS
 ### Authors
 Pedro Laxe, Gabriel Takashi Katakura
 
+### Contributors
+William Reis Fernandes(@globsecure)
+
 [drag]: https://raw.githubusercontent.com/pedrolaxe/js-terminal/master/image1.jpg
 
 ### Getting Started
@@ -17,5 +20,21 @@ Pedro Laxe, Gabriel Takashi Katakura
 git clone https://github.com/pedrolaxe/js-terminal.git js-terminal
 cd js-terminal
 npm install
-gulp production 
+```
+
+### Dev
+```bash
+gulp serve 
+```
+
+### JSHint
+```bash
+gulp jshint 
+```
+
+### JSHint
+Create files for publish on directory ./dist
+
+```bash
+gulp build 
 ```

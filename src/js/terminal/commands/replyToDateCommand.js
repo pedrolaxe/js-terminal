@@ -1,5 +1,5 @@
-(function(repository) {
-    repository.register({
+(function(Terminal) {
+    Terminal.commands.replyToDateCommand = {
         name: 'date',
         response: function() {
             var timeAndDate = new Date(),
@@ -11,5 +11,5 @@
 
             return dateDay + '/' + dateMonth + '/' + dateYear;
         }
-    });
-})(window.CommandRepository);
+    };
+})(window.Terminal);

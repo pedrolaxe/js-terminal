@@ -1,10 +1,10 @@
-(function(global, Terminal) {
-    global.TerminalFactory = {
+(function(Terminal) {
+    Terminal.TerminalFactory = {
         create: function() {
             return Terminal.create({
                 results: document.getElementById('terminalReslutsCont'),
                 textInput: document.getElementById('terminalTextInput')
             });
         }
-    }
-})(window, window.Terminal);
+    };
+})(window.Terminal);
