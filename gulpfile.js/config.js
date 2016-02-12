@@ -1,7 +1,7 @@
 module.exports = {
 	root: {
-		src: "src",
-		dest: "dist"	
+		src: "./src",
+		dest: "./dist"	
 	},
 	html: {
 		src: "src/*.html",
