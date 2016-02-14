@@ -5,7 +5,7 @@ The copy of Terminal developed in pure JS
 ![][drag]
 
 ### Version
-1.1.3
+1.1.4
 
 ### Authors
 Pedro Laxe, Gabriel Takashi Katakura
@@ -23,6 +23,8 @@ npm install
 ```
 
 ### Dev
+
+using the
 ```bash
 gulp server
 ```
