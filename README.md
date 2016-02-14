@@ -23,8 +23,6 @@ npm install
 ```
 
 ### Dev
-
-using the
 ```bash
 gulp server
 ```
