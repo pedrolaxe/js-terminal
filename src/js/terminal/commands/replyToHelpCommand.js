@@ -7,7 +7,7 @@
             '- Google + keyword to search directly in Google (ex. google phpsec)',
             '- Yahoo + keyword to search directly in Yahoo (ex. yahoo dogs)',
             '- YouTube + keyword to search directly in YouTube (ex. youtube fora pt)',
-            '- Wiki + keyword to search directly in Wikipedia (ex. wiki php)',
+            '- Wiki + keyword to search directly in Wikipedia (ex. wiki javascript)',
             '- \'Time\' will display the current time.',
             '- \'Date\' will display the current date.',
             '- \'creators\' show the creators names.',
