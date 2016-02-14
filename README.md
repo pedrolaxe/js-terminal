@@ -24,17 +24,17 @@ npm install
 
 ### Dev
 ```bash
-gulp serve 
+gulp server
 ```
 
 ### JSHint
 ```bash
-gulp jshint 
+gulp jshint
 ```
 
 ### JSHint
 Create files for publish on directory ./dist
 
 ```bash
-gulp build 
+gulp build
 ```
