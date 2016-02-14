@@ -1,9 +1,16 @@
-/*globals process*/
-var config = require('../config'),
-	gulp = require('gulp'),
-    browserSync = require('browser-sync');
+'use strict';
 
-gulp.task('server', function() {
-    browserSync(config.browserSync);
-    gulp.watch([config.html.src, config.css.src, config.scripts.src]).on('change', browserSync.reload);
+var gulp = require('gulp');
+var browserSync = require('browser-sync');
+var reload = browserSync.reload;
+
+// watch files for changes and reload
+gulp.task('server', ['watch', 'scripts'], function() {
+    browserSync({
+        server: {
+            baseDir: 'src'
+        }
+    });
+
+    gulp.watch(['*.html', 'css/**/*.css', 'js/**/*.js'], {cwd: 'src'}, reload);
 });

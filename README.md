@@ -5,7 +5,7 @@ The copy of Terminal developed in pure JS
 ![][drag]
 
 ### Version
-1.1
+1.1.4
 
 ### Authors
 Pedro Laxe, Gabriel Takashi Katakura
@@ -24,17 +24,10 @@ npm install
 
 ### Dev
 ```bash
-gulp serve 
+gulp server
 ```
 
 ### JSHint
 ```bash
-gulp jshint 
-```
-
-### JSHint
-Create files for publish on directory ./dist
-
-```bash
-gulp build 
+gulp jshint
 ```
