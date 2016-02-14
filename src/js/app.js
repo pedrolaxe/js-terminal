@@ -13,7 +13,7 @@
         create: function(options) {
             var results = options.results,
                 textInput = options.textInput;
-                
+
             return {
                 _addTextToResults: function(text) {
                     results.innerHTML += '<p>' + text + '</p>';
@@ -35,7 +35,7 @@
                         response = '';
 
                     this._addTextToResults('<p class=\'userEnteredText\'>> ' + commandText + '</p>');
-                    
+
                     if (command) {
                         parameter = commandText.replace(command.name, '').trim();
                         response = command.execute(parameter);
@@ -43,7 +43,7 @@
                     else {
                         response = '<p><i>The command <b>' + commandText + '</b> was not found. Type <b>Help</b> to see all commands.</i></p>';
                     }
-                    
+
                     this._addTextToResults(response);
                     this._clearInput();
                     this._scrollToBottomOfResults();
@@ -51,7 +51,7 @@
             };
         }
     };
-    
+
     global.Terminal = Terminal;
 })(window);
 (function(Terminal) {
@@ -63,32 +63,32 @@
     Terminal.CommandDecorator = {
         _transformToFunction: function(response) {
             if (isArray(response)) {
-                response = response.join('<br>');    
+                response = response.join('<br>');
             }
-            
+
             if (typeof response === 'string') {
                 return function() {
                     return response;
                 };
             }
-            
+
             return response || emptyFunction;
         },
         decorate: function(command) {
             var name = command.name || '',
                 aliases = command.aliases || [],
                 execute = command.execute || this._transformToFunction(command.response);
-                
+
             return {
                 name: name,
                 aliases: aliases,
-                aliasesAndName: aliases.concat([ name ]), 
+                aliasesAndName: aliases.concat([ name ]),
                 parameter: command.parameter || null,
                 execute: function(param) {
                     if (param === '' && this.parameter) {
                         return this.parameter.messageIfMissing;
                     }
-                    
+
                     return execute(param);
                 }
             };
@@ -106,13 +106,13 @@
         findByCommandText: function(commandText) {
             return this._data.find(function(command, index, obj) {
                 var aliasesAndName = command.aliasesAndName;
-                
+
                 if (command.parameter) {
                     return !!aliasesAndName.find(function(aliasOrName) {
                         return commandText.indexOf(aliasOrName) === 0;
                     });
                 }
-                
+
                 return aliasesAndName.indexOf(commandText) !== -1;
             });
         }
@@ -155,7 +155,7 @@
                 dateDay = timeAndDate.getDate(),
                 dateMonth = timeAndDate.getMonth() + 1,
                 dateYear = timeAndDate.getFullYear();
-            
+
             console.log(dateDay);
 
             return dateDay + '/' + dateMonth + '/' + dateYear;
@@ -198,8 +198,9 @@
             '- Open + website URL to open it in the browser (ex. open phpsec.com.br)',
             '- Google + keyword to search directly in Google (ex. google phpsec)',
             '- Yahoo + keyword to search directly in Yahoo (ex. yahoo dogs)',
+            '- iiissa + keyword to search directly in IIISSA (ex. iiissa pedro)',
             '- YouTube + keyword to search directly in YouTube (ex. youtube fora pt)',
-            '- Wiki + keyword to search directly in Wikipedia (ex. wiki php)',
+            '- Wiki + keyword to search directly in Wikipedia (ex. wiki javascript)',
             '- \'Time\' will display the current time.',
             '- \'Date\' will display the current date.',
             '- \'creators\' show the creators names.',
@@ -218,14 +219,14 @@
     function padLeft(value, totalWidth, paddingChar){
         return Array(totalWidth - value.toString().length + 1).join(paddingChar || '0') + value;
     }
-    
+
     Terminal.commands.replyToTimeCommand = {
         name: 'time',
         response: function() {
             var timeAndDate = new Date(),
                 timeHours = padLeft(timeAndDate.getHours(), 2),
                 timeMinutes = padLeft(timeAndDate.getMinutes(), 2);
-            
+
             console.log(timeAndDate.getDate());
 
             return timeHours + ":" + timeMinutes;
@@ -271,6 +272,19 @@
         }
     };
 })(window.Terminal);
+(function(Terminal) {
+    Terminal.commands.searchOniiissaCommand = {
+        name: 'iiissa',
+        parameter: {
+            name: 'search',
+            messageIfMissing: 'Type iiissa + something to search for.'
+        },
+        execute: function(search) {
+            window.open('https://iiissa.com.br/buscar?q=' + search + '&tipo=emp', '_blank');
+            return '<i>I\'ve searched on IIISSA for <b>' + search + '</b> it should be opened now.</i>';
+        }
+    };
+})(window.Terminal);
 
 (function(Terminal) {
     Terminal.commands.searchOnYoutubeCommand = {
@@ -287,18 +301,18 @@
 })(window.Terminal);
 /**
 * JS Terminal
-* Version 1.1
+* Version 1.1.4
 * Creator: Pedro Laxe <pedro@phpsec.com.br>
 * Contributor: Gabriel Takashi Katakura <gt.katakura@gmail.com>
 **/
 
 (function(Terminal) {
     Terminal.start();
-    
+
     document.addEventListener('DOMContentLoaded', function() {
         var terminal = Terminal.TerminalFactory.create();
         terminal.focus();
-        
+
         document.getElementsByTagName('form')[0].onsubmit = function(evt) {
             evt.preventDefault();
             terminal.enter();
