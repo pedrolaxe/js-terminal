@@ -1,16 +1,8 @@
-'use strict';
+/*globals process*/
+var config = require('../config'),
+	gulp = require('gulp'),
+	browserSync = require('browser-sync');
 
-var gulp = require('gulp');
-var browserSync = require('browser-sync');
-var reload = browserSync.reload;
-
-// watch files for changes and reload
-gulp.task('server', ['watch', 'scripts'], function() {
-    browserSync({
-        server: {
-            baseDir: 'src'
-        }
-    });
-
-    gulp.watch(['*.html', 'css/**/*.css', 'js/**/*.js'], {cwd: 'src'}, reload);
+gulp.task('server', [ 'build', 'watch' ], function() {
+	browserSync(config.browserSync);
 });

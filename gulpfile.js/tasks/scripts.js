@@ -5,7 +5,8 @@ var config = require('../config'),
 	jshint = require('gulp-jshint'),
 	concat = require('gulp-concat'),
 	uglify = require('gulp-uglify'),
-	loadPlugins = require('gulp-load-plugins')();
+	loadPlugins = require('gulp-load-plugins')(),
+    browserSync = require('browser-sync');
 
 gulp.task('scripts', function() {
 	return gulp.src(config.scripts.src)
@@ -14,5 +15,6 @@ gulp.task('scripts', function() {
 		.pipe(concat('app.js'))
 		.pipe(gulpif(config.env === 'production', uglify()))
 		.pipe(gulp.dest(config.scripts.dest))
-		.pipe(loadPlugins.size());
+		.pipe(loadPlugins.size())
+        .pipe(browserSync.stream());
 });
