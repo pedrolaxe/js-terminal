@@ -1,3 +1,10 @@
+/**
+* JS Terminal
+* Version 1.1.4
+* Author: Pedro Laxe <pedro@phpsec.com.br>
+* Contributor: Gabriel Takashi Katakura <gt.katakura@gmail.com>
+**/
+
 (function(global) {
     var Terminal = {
         _resolveCommands: function() {
@@ -299,12 +306,6 @@
         }
     };
 })(window.Terminal);
-/**
-* JS Terminal
-* Version 1.1.4
-* Creator: Pedro Laxe <pedro@phpsec.com.br>
-* Contributor: Gabriel Takashi Katakura <gt.katakura@gmail.com>
-**/
 
 (function(Terminal) {
     Terminal.start();
