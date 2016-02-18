@@ -1,12 +1,7 @@
-(function(Terminal) {
-    var emptyFunction = function() {},
-        isArray = function(arg) {
-            return Object.prototype.toString.call(arg) === '[object Array]';
-        };
-
+(function(Terminal, _) {
     Terminal.CommandDecorator = {
         _transformToFunction: function(response) {
-            if (isArray(response)) {
+            if (_.isArray(response)) {
                 response = response.join('<br>');    
             }
             
@@ -16,7 +11,7 @@
                 };
             }
             
-            return response || emptyFunction;
+            return response || _.noop;
         },
         decorate: function(command) {
             var name = command.name || '',
@@ -38,4 +33,4 @@
             };
         }
     };
-})(window.Terminal);
+})(window.Terminal, window.underscore);
