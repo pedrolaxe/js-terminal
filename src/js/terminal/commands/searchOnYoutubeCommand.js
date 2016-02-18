@@ -1,4 +1,4 @@
-(function(Terminal) {
+(function(Terminal, _) {
     Terminal.commands.searchOnYoutubeCommand = {
         name: 'youtube',
         parameter: {
@@ -7,7 +7,7 @@
         },
         execute: function(search) {
             window.open('https://www.youtube.com/results?search_query=' + search, '_blank');
-            return '<i>I\'ve searched on YouTube for <b>' + search + '</b> it should be opened now.</i>';
+            return '<i>I\'ve searched on YouTube for <b>' + _.escape(search) + '</b> it should be opened now.</i>';
         }
     };
-})(window.Terminal);
+})(window.Terminal, window.underscore);

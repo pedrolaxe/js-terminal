@@ -1,4 +1,4 @@
-(function(global) {
+(function(global, _) {
     var Terminal = {
         _resolveCommands: function() {
             return Object.keys(this.commands).map(function(key) {
@@ -33,21 +33,15 @@
                         command = Terminal.CommandRepository.findByCommandText(commandText.toLowerCase()),
                         parameter = '',
                         response = '';
-                    function htmlEntities(str) {
-                        return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-                      }
-                    this._addTextToResults('<p class=\'userEnteredText\'>> ' + htmlEntities(commandText) + '</p>');
 
-
-
-
+                    this._addTextToResults('<p class=\'userEnteredText\'>> ' + _.escape(commandText) + '</p>');
 
                     if (command) {
                         parameter = commandText.replace(command.name, '').trim();
                         response = command.execute(parameter);
                     }
                     else {
-                        response = '<p><i>The command <b>' + htmlEntities(commandText) + '</b> was not found. Type <b>Help</b> to see all commands.</i></p>';
+                        response = '<p><i>The command <b>' + _.escape(commandText) + '</b> was not found. Type <b>Help</b> to see all commands.</i></p>';
                     }
 
                     this._addTextToResults(response);
@@ -59,4 +53,4 @@
     };
 
     global.Terminal = Terminal;
-})(window);
+})(window, window.underscore);

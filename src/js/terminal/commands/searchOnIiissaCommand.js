@@ -1,4 +1,4 @@
-(function(Terminal) {
+(function(Terminal, _) {
     Terminal.commands.searchOnIiissaCommand = {
         name: 'iiissa',
         parameter: {
@@ -7,7 +7,7 @@
         },
         execute: function(search) {
             window.open('https://iiissa.com.br/buscar?q=' + search + '&tipo=emp', '_blank');
-            return '<i>I\'ve searched on IIISSA for <b>' + search + '</b> it should be opened now.</i>';
+            return '<i>I\'ve searched on IIISSA for <b>' + _.escape(search) + '</b> it should be opened now.</i>';
         }
     };
-})(window.Terminal);
+})(window.Terminal, window.underscore);

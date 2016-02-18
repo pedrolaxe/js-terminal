@@ -1,4 +1,4 @@
-(function(Terminal) {
+(function(Terminal, _) {
     Terminal.commands.openWindowCommand = {
         name: 'open',
         parameter: {
@@ -7,7 +7,7 @@
         },
         execute: function(link) {
             window.open('http://' + link.toLowerCase(), '_blank');
-            return '<i>The URL <b>' + link + '</b> should be opened now.</i>';
+            return '<i>The URL <b>' + _.escape(link) + '</b> should be opened now.</i>';
         }
     };
-})(window.Terminal);
+})(window.Terminal, window.underscore);

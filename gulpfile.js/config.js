@@ -16,6 +16,7 @@ module.exports = {
 	},
 	scripts: {
 		src: [
+            "src/js/underscore/underscore.js",
 			"src/js/terminal/terminal.js",
 			"src/js/terminal/**/*.js",
 			"src/js/view/index.js"
