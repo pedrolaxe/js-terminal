@@ -27,7 +27,7 @@
     "js-terminal",
     "terminal"
   ],
-  "dependencies": {
+  "Devdependencies": {
     "browser-sync": "2.11.1",
     "gulp": "3.9.0",
     "gulp-concat": "2.6.0",
