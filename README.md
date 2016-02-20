@@ -5,7 +5,7 @@ The copy of Terminal developed in pure JS
 ![][drag]
 
 ### Version
-1.2.1
+1.2.2
 
 ### Authors
 Pedro Laxe, Gabriel Takashi Katakura
