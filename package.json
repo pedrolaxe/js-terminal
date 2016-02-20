@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pedrolaxe/js-terminal.git"
+    "url": "git://github.com/pedrolaxe/js-terminal.git"
   },
   "author": {
     "name": "pedrolaxe",
@@ -23,6 +23,10 @@
     "url": "https://github.com/pedrolaxe/js-terminal/issues"
   },
   "homepage": "https://github.com/pedrolaxe/js-terminal/",
+  "keywords": [
+    "js-terminal",
+    "terminal"
+  ],
   "dependencies": {
     "browser-sync": "2.11.1",
     "gulp": "3.9.0",
