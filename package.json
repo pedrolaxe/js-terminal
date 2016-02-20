@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/pedrolaxe/js-terminal.git"
   },
-  "author": "",
+  "author": "pedrolaxe",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/pedrolaxe/js-terminal/issues"
@@ -30,7 +30,7 @@
     "gulp-uglify": "^1.5.2",
     "jshint": "^2.9.1",
     "jshint-stylish": "^2.1.0",
-    "open": "0.0.5",
+    "open": "^0.0.5",
     "path": "^0.12.7",
     "require-dir": "^0.3.0"
   }
