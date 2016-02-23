@@ -1,6 +1,6 @@
 {
   "name": "js-terminal",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "The copy of Terminal developed in pure JS",
   "main": "index.js",
   "scripts": {
