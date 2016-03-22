@@ -1,6 +1,6 @@
 /**
 * JS Terminal
-* Version 1.1.4
+* Version 1.2.3
 * Author: Pedro Laxe <pedro@phpsec.com.br>
 * Contributor: Gabriel Takashi Katakura <gt.katakura@gmail.com>
 **/
