@@ -1,8 +1,10 @@
 # JS Terminal
 
+[![Code Climate](https://codeclimate.com/github/pedrolaxe/js-terminal/badges/gpa.svg)](https://codeclimate.com/github/pedrolaxe/js-terminal)
+
 The copy of Terminal developed in pure JS
 
-![][drag]
+![drag]
 
 ### Version
 1.2.3
@@ -12,8 +14,6 @@ Pedro Laxe, Gabriel Takashi Katakura
 
 ### Contributors
 William Reis Fernandes (@globsecure)
-
-[drag]: https://raw.githubusercontent.com/pedrolaxe/js-terminal/master/image1.jpg
 
 ### Getting Started
 ```bash
@@ -27,3 +27,5 @@ npm install
 ```bash
 gulp dev
 ```
+
+[drag]: https://raw.githubusercontent.com/pedrolaxe/js-terminal/master/image1.jpg
