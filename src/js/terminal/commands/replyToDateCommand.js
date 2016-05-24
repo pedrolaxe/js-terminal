@@ -1,15 +1,11 @@
-(function(Terminal) {
-    Terminal.commands.replyToDateCommand = {
-        name: 'date',
-        response: function() {
-            var timeAndDate = new Date(),
-                dateDay = timeAndDate.getDate(),
-                dateMonth = timeAndDate.getMonth() + 1,
-                dateYear = timeAndDate.getFullYear();
-            
-            console.log(dateDay);
+export default {
+  name: 'date',
+  response() {
+    const timeAndDate = new Date();
+    const dateDay = timeAndDate.getDate();
+    const dateMonth = timeAndDate.getMonth() + 1;
+    const dateYear = timeAndDate.getFullYear();
 
-            return dateDay + '/' + dateMonth + '/' + dateYear;
-        }
-    };
-})(window.Terminal);
+    return `${dateDay}/${dateMonth}/${dateYear}`;
+  },
+};

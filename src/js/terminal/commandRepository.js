@@ -1,23 +1,26 @@
-(function(Terminal) {
-    Terminal.CommandRepository = {
-        _data: [],
-        register: function(commands) {
-            for (var i = 0, ii = commands.length; i < ii; i++) {
-                this._data.push(commands[i]);
-            }
-        },
-        findByCommandText: function(commandText) {
-            return this._data.find(function(command, index, obj) {
-                var aliasesAndName = command.aliasesAndName;
-                
-                if (command.parameter) {
-                    return !!aliasesAndName.find(function(aliasOrName) {
-                        return commandText.indexOf(aliasOrName) === 0;
-                    });
-                }
-                
-                return aliasesAndName.indexOf(commandText) !== -1;
-            });
-        }
-    };
-})(window.Terminal);
+import CommandDecorator from './commandDecorator';
+
+const data = [];
+
+const register = commands => {
+  for (const command of commands) {
+    const decorated = CommandDecorator.decorate(command);
+    data.push(decorated);
+  }
+};
+
+const findByCommandText = commandText => {
+  const finder = command => {
+    const { aliasesAndName, parameter } = command;
+
+    if (parameter) {
+      return !!aliasesAndName.find(aliasOrName => commandText.indexOf(aliasOrName) === 0);
+    }
+
+    return aliasesAndName.indexOf(commandText) !== -1;
+  };
+
+  return data.find(finder);
+};
+
+export default { register, findByCommandText };

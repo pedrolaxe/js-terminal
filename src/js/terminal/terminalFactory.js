@@ -1,10 +1,10 @@
-(function(Terminal) {
-    Terminal.TerminalFactory = {
-        create: function() {
-            return Terminal.create({
-                results: document.getElementById('terminalReslutsCont'),
-                textInput: document.getElementById('terminalTextInput')
-            });
-        }
-    };
-})(window.Terminal);
+import Terminal from './terminal';
+
+const create = () => {
+  return Terminal.create({
+    results: document.getElementById('terminalReslutsCont'),
+    textInput: document.getElementById('terminalTextInput'),
+  });
+};
+
+export default { create };
