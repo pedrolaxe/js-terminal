@@ -1,56 +1,50 @@
-(function(global, _) {
-    var Terminal = {
-        _resolveCommands: function() {
-            return Object.keys(this.commands).map(function(key) {
-                return Terminal.CommandDecorator.decorate(Terminal.commands[key]);
-            });
-        },
-        start: function() {
-            var resolvedCommands = this._resolveCommands();
-            this.CommandRepository.register(resolvedCommands);
-        },
-        commands: {},
-        create: function(options) {
-            var results = options.results,
-                textInput = options.textInput;
+import _ from '../underscore';
+import CommandRepository from './commandRepository';
+import commands from './commands';
 
-            return {
-                _addTextToResults: function(text) {
-                    results.innerHTML += '<p>' + text + '</p>';
-                },
-                _clearInput: function() {
-                    textInput.value = '';
-                },
-                _scrollToBottomOfResults: function() {
-                    results.scrollTop = results.scrollHeight;
-                },
-                focus: function() {
-                    textInput.focus();
-                    this._scrollToBottomOfResults();
-                },
-                enter: function() {
-                    var commandText = textInput.value.trim(),
-                        command = Terminal.CommandRepository.findByCommandText(commandText.toLowerCase()),
-                        parameter = '',
-                        response = '';
+const start = () => {
+  CommandRepository.register(commands);
+};
 
-                    this._addTextToResults('<p class=\'userEnteredText\'>> ' + _.escape(commandText) + '</p>');
+const create = ({ results, textInput }) => {
+  const addTextToResults = text => {
+    results.innerHTML += `<p>${text}</p>`;
+  };
 
-                    if (command) {
-                        parameter = commandText.replace(command.name, '').trim();
-                        response = command.execute(parameter);
-                    }
-                    else {
-                        response = '<p><i>The command <b>' + _.escape(commandText) + '</b> was not found. Type <b>Help</b> to see all commands.</i></p>';
-                    }
+  const clearInput = () => {
+    textInput.value = '';
+  };
 
-                    this._addTextToResults(response);
-                    this._clearInput();
-                    this._scrollToBottomOfResults();
-                }
-            };
-        }
-    };
+  const scrollToBottomOfResults = () => {
+    results.scrollTop = results.scrollHeight;
+  };
 
-    global.Terminal = Terminal;
-})(window, window.underscore);
+  const focus = () => {
+    textInput.focus();
+    scrollToBottomOfResults();
+  };
+
+  const enter = () => {
+    const commandText = textInput.value.trim();
+    const command = CommandRepository.findByCommandText(commandText.toLowerCase());
+    let parameter = '';
+    let response = '';
+
+    addTextToResults(_.escape`<p class="userEnteredText">> ${commandText}</p>`);
+
+    if (command) {
+      parameter = commandText.replace(command.name, '').trim();
+      response = command.execute(parameter);
+    } else {
+      response = _.escape`<p><i>The command <b>${commandText}</b> was not found. Type <b>Help</b> to see all commands.</i></p>`;
+    }
+
+    addTextToResults(response);
+    clearInput();
+    scrollToBottomOfResults();
+  };
+
+  return { focus, enter };
+};
+
+export default { start, create };

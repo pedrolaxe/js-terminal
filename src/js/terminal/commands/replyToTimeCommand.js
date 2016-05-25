@@ -1,18 +1,12 @@
-(function(Terminal) {
-    function padLeft(value, totalWidth, paddingChar){
-        return Array(totalWidth - value.toString().length + 1).join(paddingChar || '0') + value;
-    }
-    
-    Terminal.commands.replyToTimeCommand = {
-        name: 'time',
-        response: function() {
-            var timeAndDate = new Date(),
-                timeHours = padLeft(timeAndDate.getHours(), 2),
-                timeMinutes = padLeft(timeAndDate.getMinutes(), 2);
-            
-            console.log(timeAndDate.getDate());
+import _ from '../../underscore';
 
-            return timeHours + ":" + timeMinutes;
-        }
-    };
-})(window.Terminal);
+export default {
+  name: 'time',
+  response() {
+    const timeAndDate = new Date();
+    const timeHours = _.padLeft(timeAndDate.getHours(), 2);
+    const timeMinutes = _.padLeft(timeAndDate.getMinutes(), 2);
+
+    return `${timeHours}:${timeMinutes}`;
+  },
+};
