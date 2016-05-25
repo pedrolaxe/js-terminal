@@ -7,8 +7,6 @@ export default {
     const timeHours = _.padLeft(timeAndDate.getHours(), 2);
     const timeMinutes = _.padLeft(timeAndDate.getMinutes(), 2);
 
-    console.log(timeAndDate.getDate());
-
     return `${timeHours}:${timeMinutes}`;
   },
 };

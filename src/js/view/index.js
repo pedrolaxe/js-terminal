@@ -18,6 +18,5 @@ document.addEventListener('DOMContentLoaded', () => {
     event.preventDefault();
     terminal.enter();
     window.scrollTo(0, 150);
-    console.log('JS Terminal Loaded');
   };
 });
