@@ -1,6 +1,6 @@
-import factorySearchOnCommand from './factorySearchOnCommand';
+import searchOnCommandFactory from './searchOnCommandFactory';
 
-export default factorySearchOnCommand({
+export default searchOnCommandFactory({
   engine: 'Yahoo',
   uri: 'https://br.search.yahoo.com/search',
   keyName: 'p',

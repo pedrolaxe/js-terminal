@@ -1,6 +1,6 @@
-import factorySearchOnCommand from './factorySearchOnCommand';
+import searchOnCommandFactory from './searchOnCommandFactory';
 
-export default factorySearchOnCommand({
+export default searchOnCommandFactory({
   engine: 'Wikipedia',
   name: 'wiki',
   uri: 'https://pt.wikipedia.org/w/index.php',

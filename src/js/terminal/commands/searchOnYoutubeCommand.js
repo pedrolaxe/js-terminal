@@ -1,6 +1,6 @@
-import factorySearchOnCommand from './factorySearchOnCommand';
+import searchOnCommandFactory from './searchOnCommandFactory';
 
-export default factorySearchOnCommand({
+export default searchOnCommandFactory({
   engine: 'YouTube',
   uri: 'https://www.youtube.com/results',
   keyName: 'search_query',

@@ -1,6 +1,6 @@
 import _ from '../../underscore';
 
-const factorySearchOnCommand = ({ engine, uri, name = engine.toLowerCase(), keyName = 'q' }) => {
+const searchOnCommandFactory = ({ engine, uri, name = engine.toLowerCase(), keyName = 'q' }) => {
   return {
     name,
     parameter: {
@@ -14,4 +14,4 @@ const factorySearchOnCommand = ({ engine, uri, name = engine.toLowerCase(), keyN
   };
 };
 
-export default factorySearchOnCommand;
+export default searchOnCommandFactory;
