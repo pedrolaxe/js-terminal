@@ -2,7 +2,7 @@
 
 [![Code Climate](https://codeclimate.com/github/pedrolaxe/js-terminal/badges/gpa.svg)](https://codeclimate.com/github/pedrolaxe/js-terminal)
 
-The copy of Terminal developed in pure JS
+Terminal developed in pure JS
 
 ![drag]
 

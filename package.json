@@ -1,7 +1,7 @@
 {
   "name": "js-terminal",
   "version": "1.3",
-  "description": "The copy of Terminal developed in pure JS",
+  "description": "Terminal developed in pure JS",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
