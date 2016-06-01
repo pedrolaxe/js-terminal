@@ -28,4 +28,4 @@ npm install
 gulp dev
 ```
 
-[drag]: https://raw.githubusercontent.com/pedrolaxe/js-terminal/master/image1.jpg
+[drag]: https://raw.githubusercontent.com/pedrolaxe/js-terminal/master/content/index.jpg
