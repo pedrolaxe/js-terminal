@@ -9,7 +9,7 @@ const searchOnCommandFactory = ({ engine, uri, name = engine.toLowerCase(), keyN
     },
     execute(search) {
       window.open(`${uri}?${keyName}=${search}`, '_blank');
-      return _.escape`<i>I\'ve searched on ${name} for <b>${search}</b> it should be opened now.</i>`;
+      return _.escape`<i>I\'ve searched on ${name} for <b>${search}</b> see results.</i>`;
     },
   };
 };

@@ -36,7 +36,7 @@ const create = ({ results, textInput }) => {
       parameter = commandText.replace(command.name, '').trim();
       response = command.execute(parameter);
     } else {
-      response = _.escape`<p><i>The command <b>${commandText}</b> was not found. Type <b>Help</b> to see all commands.</i></p>`;
+      response = _.escape`<p><i><b>${commandText}</b> was not found. Type <b>help</b></i></p>`;
     }
 
     addTextToResults(response);
