@@ -3,7 +3,7 @@ import commands from './commands';
 
 const create = ({ results, textInput, commandRepository }) => {
   const addTextToResults = texts => {
-    const fullText = _.flatten(texts).map(text => `<p>${text}</p>`).join('');
+    const fullText = _.flatten([texts]).map(text => `<p>${text}</p>`).join('');
     results.innerHTML += fullText;
   };
 
