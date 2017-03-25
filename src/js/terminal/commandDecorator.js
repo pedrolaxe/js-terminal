@@ -22,7 +22,7 @@ const decorateExecute = execute => {
   };
 };
 
-const decorate = ({
+const commandDecorator = ({
     name = '',
     aliases = [],
     parameter = null,
@@ -35,4 +35,4 @@ const decorate = ({
   return { name, aliases, aliasesAndName, parameter, execute };
 };
 
-export default { decorate };
+export default commandDecorator;

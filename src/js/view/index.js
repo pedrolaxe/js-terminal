@@ -5,13 +5,10 @@
 * Contributor: Gabriel Takashi Katakura <gt.katakura@gmail.com>
 **/
 
-import Terminal from '../terminal/terminal';
-import TerminalFactory from '../terminal/terminalFactory';
-
-Terminal.start();
+import terminalFactory from './terminalFactory';
 
 document.addEventListener('DOMContentLoaded', () => {
-  const terminal = TerminalFactory.create();
+  const terminal = terminalFactory();
   terminal.focus();
 
   document.getElementsByTagName('form')[0].onsubmit = event => {
