@@ -1,6 +1,6 @@
-const padLeft = (value, totalWidth, paddingChar) => {
+const padLeft = (value, totalWidth, paddingChar = '0') => {
   const length = totalWidth - value.toString().length + 1;
-  return Array(length).join(paddingChar || '0') + value;
+  return Array(length).join(paddingChar) + value;
 };
 
 export default padLeft;

@@ -1,26 +1,24 @@
-import CommandDecorator from './commandDecorator';
+import _ from '../underscore';
+import commandDecorator from './commandDecorator';
 
-const data = [];
+const decorateCommands = commands => Array.from(commands).map(commandDecorator);
 
-const register = commands => {
-  for (const command of commands) {
-    const decorated = CommandDecorator.decorate(command);
-    data.push(decorated);
-  }
-};
+const create = _.flow(decorateCommands, commands => {
+  const findByCommandText = commandText => {
+    const finder = command => {
+      const { aliasesAndName, parameter } = command;
 
-const findByCommandText = commandText => {
-  const finder = command => {
-    const { aliasesAndName, parameter } = command;
+      if (parameter) {
+        return aliasesAndName.find(::commandText.startsWith);
+      }
 
-    if (parameter) {
-      return !!aliasesAndName.find(aliasOrName => commandText.indexOf(aliasOrName) === 0);
-    }
+      return aliasesAndName.includes(commandText);
+    };
 
-    return aliasesAndName.indexOf(commandText) !== -1;
+    return commands.find(finder);
   };
 
-  return data.find(finder);
-};
+  return { findByCommandText };
+});
 
-export default { register, findByCommandText };
+export default { create };

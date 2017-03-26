@@ -3,10 +3,10 @@ import _ from '../../underscore';
 export default {
   name: 'time',
   response() {
-    const timeAndDate = new Date();
-    const timeHours = _.padLeft(timeAndDate.getHours(), 2);
-    const timeMinutes = _.padLeft(timeAndDate.getMinutes(), 2);
+    const date = new Date();
+    const hours = _.padLeft(date.getHours(), 2);
+    const minutes = _.padLeft(date.getMinutes(), 2);
 
-    return `${timeHours}:${timeMinutes}`;
+    return `${hours}:${minutes}`;
   },
 };

@@ -1,15 +1,17 @@
 import _ from '../underscore';
 
-const transformResponse = response => {
-  if (_.isArray(response)) {
-    return () => response.join('<br>');
-  }
-
-  if (typeof response === 'string') {
-    return () => response;
-  }
-
-  return response || _.noop;
+const commandBase = {
+  name: '',
+  aliases: [],
+  parameter: null,
+  response: null,
+  execute() {
+    const response = _.invoke(this, 'response');
+    return _.flatten([response]).join('<br>');
+  },
+  get aliasesAndName() {
+    return this.aliases.concat([this.name]);
+  },
 };
 
 const decorateExecute = execute => {
@@ -18,21 +20,17 @@ const decorateExecute = execute => {
       return this.parameter.messageIfMissing;
     }
 
-    return execute(param);
+    return this::execute(param);
   };
 };
 
-const decorate = ({
-    name = '',
-    aliases = [],
-    parameter = null,
-    response = null,
-    execute = transformResponse(response),
-}) => {
-  const aliasesAndName = aliases.concat([name]);
-  execute = decorateExecute(execute);
+const commandDecorator = command => {
+  const decorated = _.extend({}, commandBase, command);
 
-  return { name, aliases, aliasesAndName, parameter, execute };
+  return _.decorateMethods(decorated, {
+    [_]: _.once,
+    execute: decorateExecute,
+  });
 };
 
-export default { decorate };
+export default commandDecorator;

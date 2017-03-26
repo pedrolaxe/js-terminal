@@ -1,4 +1,5 @@
 const names = [
+  'nullCommand',
   'openWindowCommand',
   'replyToCreatorCommand',
   'replyToDateCommand',

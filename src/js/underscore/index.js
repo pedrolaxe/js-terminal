@@ -1,13 +1,14 @@
-import isArray from './core/isArray';
-import noop from './core/noop';
-import padLeft from './core/padLeft';
-import toStringTag from './core/toStringTag';
-import escape from './tags/escape';
+import array from './array';
+import core from './core';
+import functions from './functions';
+import object from './object';
+import tags from './tags';
 
-export default {
-  isArray,
-  noop,
-  padLeft,
-  toStringTag,
-  escape,
-};
+export default Object.assign(
+  {},
+  array,
+  core,
+  functions,
+  object,
+  tags
+);

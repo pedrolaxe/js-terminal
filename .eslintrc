@@ -1,9 +1,10 @@
 {
+  "parser": "babel-eslint",
   "extends": "airbnb",
   "rules": {
-    "arrow-body-style": 0,
-    "no-param-reassign": 0,
-    "func-names": 0,
-    "global-require": 0
+    "arrow-body-style": "off",
+    "no-param-reassign": "off",
+    "func-names": "off",
+    "global-require": "off"
   }
 }
