@@ -1,3 +1,3 @@
-const flatten = (args) => [].concat(...args);
+const flatten = array => [].concat(...array);
 
 export default flatten;

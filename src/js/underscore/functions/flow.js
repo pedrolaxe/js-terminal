@@ -1,7 +1,7 @@
-const flow = (...transformations) => {
+const flow = (...funcs) => {
   return value => {
-    return transformations.reduce((transformed, transformation) => {
-      return transformation(transformed);
+    return funcs.reduce((currentValue, func) => {
+      return func(currentValue);
     }, value);
   };
 };

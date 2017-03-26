@@ -10,5 +10,5 @@ export default Object.assign(
   core,
   functions,
   object,
-  tags
+  tags,
 );
