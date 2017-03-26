@@ -1,14 +1,17 @@
 import _ from '../underscore';
 import commands from './commands';
 
-const create = ({ results, textInput, commandRepository }) => {
+const create = ({
+  commandRepository: { findByCommandText },
+  elements: { results, input },
+}) => {
   const addTextToResults = texts => {
     const fullText = _.flatten([texts]).map(text => `<p>${text}</p>`).join('');
     results.innerHTML += fullText;
   };
 
   const clearInput = () => {
-    textInput.value = '';
+    input.value = '';
   };
 
   const scrollToBottomOfResults = () => {
@@ -16,16 +19,16 @@ const create = ({ results, textInput, commandRepository }) => {
   };
 
   const focus = () => {
-    textInput.focus();
+    input.focus();
     scrollToBottomOfResults();
   };
 
   const findCommand = commandText => {
-    return commandRepository.findByCommandText(commandText.toLowerCase()) || commands.nullCommand;
+    return findByCommandText(commandText.toLowerCase()) || commands.nullCommand;
   };
 
   const enter = () => {
-    const commandText = textInput.value.trim();
+    const commandText = input.value.trim();
     const command = findCommand(commandText);
     const parameter = commandText.replace(command.name, '').trim();
     const response = command.execute(parameter);

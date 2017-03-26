@@ -1,5 +1,5 @@
 import toStringTag from './toStringTag';
 
-const isArray = arg => toStringTag(arg) === '[object Array]';
+const isArray = value => toStringTag(value) === '[object Array]';
 
 export default isArray;

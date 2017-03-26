@@ -1,9 +1,7 @@
 import _ from '../underscore';
 import commandDecorator from './commandDecorator';
 
-const decorateCommands = commands => {
-  return Array.from(commands).map(commandDecorator);
-};
+const decorateCommands = commands => Array.from(commands).map(commandDecorator);
 
 const create = _.flow(decorateCommands, commands => {
   const findByCommandText = commandText => {

@@ -1,17 +1,14 @@
-import flatten from './core/flatten';
-import flow from './core/flow';
-import isArray from './core/isArray';
-import noop from './core/noop';
-import padLeft from './core/padLeft';
-import toStringTag from './core/toStringTag';
-import escape from './tags/escape';
+import array from './array';
+import core from './core';
+import functions from './functions';
+import object from './object';
+import tags from './tags';
 
-export default {
-  flatten,
-  flow,
-  isArray,
-  noop,
-  padLeft,
-  toStringTag,
-  escape,
-};
+export default Object.assign(
+  {},
+  array,
+  core,
+  functions,
+  object,
+  tags
+);

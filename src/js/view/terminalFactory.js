@@ -4,8 +4,10 @@ import commandRepositoryFactory from '../terminal/commandRepositoryFactory';
 const terminalFactory = () => {
   return Terminal.create({
     commandRepository: commandRepositoryFactory(),
-    results: document.getElementById('terminalReslutsCont'),
-    textInput: document.getElementById('terminalTextInput'),
+    elements: {
+      results: document.getElementById('terminalReslutsCont'),
+      input: document.getElementById('terminalTextInput'),
+    },
   });
 };
 
