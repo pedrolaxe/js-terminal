@@ -6,7 +6,7 @@
   "scripts": {
     "test": "npm run coverage",
     "test:unit": "mocha --compilers js:babel-core/register test/unit/**/*.spec.js",
-    "coverage": "nyc -r=lcov -r=text -i babel-register mocha test/**/*.spec.js"
+    "coverage": "nyc -r=lcov -r=text -i babel-core/register mocha test/**/*.spec.js"
   },
   "repository": {
     "type": "git",
