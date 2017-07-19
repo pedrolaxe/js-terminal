@@ -11,7 +11,7 @@ describe('flatten', () => {
   describe('when is a linear array', () => {
     it('should return a linear array', () => {
       const result = flatten([1, 2, 3]);
-      expect(result).to.eql([1, 2, 3])
+      expect(result).to.eql([1, 2, 3]);
     });
   });
 
