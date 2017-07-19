@@ -2,6 +2,8 @@
 
 [![Code Climate](https://codeclimate.com/github/pedrolaxe/js-terminal/badges/gpa.svg)](https://codeclimate.com/github/pedrolaxe/js-terminal)
 
+[![Build Status](https://travis-ci.org/gtkatakura/js-terminal.svg?branch=master)](https://travis-ci.org/gtkatakura/js-terminal)
+
 Terminal developed in pure JS
 
 ![drag]
