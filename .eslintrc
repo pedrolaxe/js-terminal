@@ -14,6 +14,7 @@
     "no-restricted-syntax": ["error", "ForInStatement", "LabeledStatement", "WithStatement"]
   },
   "env": {
-    "browser": true
+    "browser": true,
+    "mocha": true
   }
 }

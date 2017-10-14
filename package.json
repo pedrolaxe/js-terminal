@@ -6,7 +6,7 @@
   "scripts": {
     "test": "npm run coverage",
     "test:unit": "mocha --compilers js:babel-core/register test/unit/**/*.spec.js",
-    "coverage": "babel-node node_modules/babel-istanbul/lib/cli cover node_modules/mocha/bin/_mocha -- --timeout 30000 test/**/*.spec.js"
+    "coverage": "nyc -r=lcov -r=text -i babel-core/register mocha test/**/*.spec.js"
   },
   "repository": {
     "type": "git",
@@ -28,10 +28,8 @@
   ],
   "dependencies": {},
   "devDependencies": {
-    "babel-cli": "^6.24.1",
     "babel-core": "^6.8.0",
     "babel-eslint": "^7.2.1",
-    "babel-istanbul": "^0.12.2",
     "babel-loader": "^6.2.4",
     "babel-plugin-transform-runtime": "^6.9.0",
     "babel-polyfill": "^6.9.0",
@@ -59,6 +57,7 @@
     "jshint": "^2.9.1",
     "jshint-stylish": "^2.1.0",
     "mocha": "^3.4.2",
+    "nyc": "^11.0.3",
     "open": "^0.0.5",
     "path": "^0.12.7",
     "require-dir": "^0.3.0",
